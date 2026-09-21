@@ -185,7 +185,7 @@ void PrimFuncFrameNode::ExitWithScope() {
   }
   function = func;
   IRBuilder builder = IRBuilder::Current();
-  if (builder->frames.empty()) {
+  if (!builder->HasConstructionFrames()) {
     TVM_FFI_CHECK(!builder->result.has_value(), ValueError)
         << "Builder.result has already been set";
     builder->result = func;

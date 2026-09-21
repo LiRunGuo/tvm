@@ -116,7 +116,7 @@ void FunctionFrameNode::ExitWithScope() {
     TVM_FFI_CHECK(local_var.has_value(), ValueError)
         << "A local function definition requires its declared reference";
     EmitVarBinding(tvm::relax::VarBinding(local_var.value(), func, span));
-  } else if (builder->frames.empty()) {
+  } else if (!builder->HasConstructionFrames()) {
     // Case 0. No outer frame, return function directly
     TVM_FFI_CHECK(!builder->result.has_value(), ValueError)
         << "Builder.result has already been set";
